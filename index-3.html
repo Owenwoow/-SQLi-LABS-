@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SQLi-LABS 靶场 - 挑战关卡</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f8f9fa;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #fff;
+      color: #333;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .nav-container {
+      background: #f8f9fa;
+      padding: 1rem 0;
+      border-bottom: 1px solid #e9ecef;
+    }
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    .nav-links a {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      color: #0066cc;
+      background: #fff;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      border: 1px solid #dee2e6;
+    }
+    .nav-links a:hover {
+      background: #f8f9fa;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      border: 1px solid #dee2e6;
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .card h2 {
+      margin: 0;
+      padding: 1rem;
+      background: #0066cc;
+      color: #fff;
+      font-size: 1.25rem;
+    }
+    .card .desc {
+      padding: 1rem;
+      line-height: 1.5;
+    }
+    .desc .en {
+      font-weight: 500;
+      color: #444;
+    }
+    .desc .zh {
+      display: block;
+      margin-top: 0.5rem;
+      color: #666;
+    }
+    .site-title {
+      color: #0066cc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        padding: 0.5rem;
+      }
+      .nav-links a {
+        width: 100%;
+        text-align: center;
+      }
+      header h1 {
+        font-size: 2rem;
+      }
+      .container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>
+      <a href="#" class="site-title">SQLi-LABS 靶场 - 挑战关卡</a>
+    </h1>
+  </header>
+
+  <div class="nav-container">
+    <div class="nav-links">
+      <a href="index.html">基础挑战</a>
+      <a href="index-1.html">高级注入</a>
+      <a href="index-2.html">堆叠注入</a>
+      <a href="sql-connections/setup-db.php">重置数据库</a>
+    </div>
+  </div>
+
+  <div class="container" id="challenge-container">
+    <!-- JS 动态生成卡片 -->
+  </div>
+
+  <script>
+    const challenges = [
+      { id: 'Challenge-1', link: 'Challenge-1', en: 'GET - Error Based - Complex Filters', zh: 'GET 方法 - 基于错误 - 复杂过滤' },
+      { id: 'Challenge-2', link: 'Challenge-2', en: 'POST - Error Based - Complex Filters', zh: 'POST 方法 - 基于错误 - 复杂过滤' },
+      { id: 'Challenge-3', link: 'Challenge-3', en: 'GET - BLIND - Complex Filters', zh: 'GET 方法 - 盲注 - 复杂过滤' },
+      { id: 'Challenge-4', link: 'Challenge-4', en: 'POST - BLIND - Complex Filters', zh: 'POST 方法 - 盲注 - 复杂过滤' },
+      { id: 'Challenge-5', link: 'Challenge-5', en: 'GET - UNION Based - Complex Filters', zh: 'GET 方法 - 基于UNION - 复杂过滤' },
+      { id: 'Challenge-6', link: 'Challenge-6', en: 'POST - UNION Based - Complex Filters', zh: 'POST 方法 - 基于UNION - 复杂过滤' }
+    ];
+
+    const container = document.getElementById('challenge-container');
+    challenges.forEach((c, i) => {
+      const a = document.createElement('a');
+      a.href = c.link;
+      a.className = 'card';
+      a.style.animationDelay = `${0.1 * i}s`;
+      a.innerHTML = `
+        <h2>${c.id}</h2>
+        <div class="desc">
+          <span class="en">${c.en}</span>
+          <span class="zh">${c.zh}</span>
+        </div>`;
+      container.appendChild(a);
+    });
+  </script>
+</body>
+</html>
